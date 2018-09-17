@@ -12,7 +12,7 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace PasswordHasher;
+namespace Phauthentic\PasswordHasher;
 
 /**
  * A password hasher that can use multiple different hashes where only
@@ -24,14 +24,14 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
     /**
      * Holds the list of password hasher objects that will be used
      *
-     * @var \PasswordHasher\PasswordHasherCollectionInterface
+     * @var \Phauthentic\PasswordHasher\PasswordHasherCollectionInterface
      */
     protected $hashers;
 
     /**
      * Constructor
      *
-     * @param \PasswordHasher\PasswordHasherCollectionInterface $hashers Hasher Collection
+     * @param \Phauthentic\PasswordHasher\PasswordHasherCollectionInterface $hashers Hasher Collection
      */
     public function __construct(PasswordHasherCollectionInterface $hashers)
     {
@@ -74,7 +74,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function check($password, string $hashedPassword): bool
     {
-        /* @var $hasher \PasswordHasher\PasswordHasherInterface */
+        /* @var $hasher \Phauthentic\PasswordHasher\PasswordHasherInterface */
         foreach ($this->hashers as $hasher) {
             if ($hasher->check($password, $hashedPassword)) {
                 return true;

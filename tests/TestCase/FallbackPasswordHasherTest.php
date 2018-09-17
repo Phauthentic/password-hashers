@@ -14,10 +14,10 @@ declare(strict_types=1);
  */
 namespace Authentication\Test\TestCase\PasswordHasher;
 
-use PasswordHasher\DefaultPasswordHasher;
-use PasswordHasher\FallbackPasswordHasher;
-use PasswordHasher\CakeLegacyPasswordHasher;
-use PasswordHasher\PasswordHasherCollection;
+use Phauthentic\PasswordHasher\DefaultPasswordHasher;
+use Phauthentic\PasswordHasher\FallbackPasswordHasher;
+use Phauthentic\PasswordHasher\CakeLegacyPasswordHasher;
+use Phauthentic\PasswordHasher\PasswordHasherCollection;
 use PHPUnit\Framework\TestCase;
 
 /**

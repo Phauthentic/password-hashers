@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace PasswordHasher;
+namespace Phauthentic\PasswordHasher;
 
 use Cake\Auth\AbstractPasswordHasher;
 use PasswordHash;

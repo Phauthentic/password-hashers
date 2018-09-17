@@ -19,12 +19,12 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "PasswordHasher\\": "src/"
+            "Phauthentic\\PasswordHasher\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PasswordHasher\\Test\\": "tests/"
+            "Phauthentic\\PasswordHasher\\Test\\": "tests/"
         }
     }
 }

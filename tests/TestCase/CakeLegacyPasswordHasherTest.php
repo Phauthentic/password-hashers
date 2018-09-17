@@ -14,7 +14,7 @@ declare(strict_types=1);
  */
 namespace Authentication\Test\TestCase\PasswordHasher;
 
-use PasswordHasher\CakeLegacyPasswordHasher;
+use Phauthentic\PasswordHasher\CakeLegacyPasswordHasher;
 use PHPUnit\Framework\TestCase;
 use Cake\Utility\Security;
 

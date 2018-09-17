@@ -14,7 +14,7 @@ declare(strict_types=1);
  */
 namespace Authentication\Test\TestCase\PasswordHasher;
 
-use PasswordHasher\DefaultPasswordHasher;
+use Phauthentic\PasswordHasher\DefaultPasswordHasher;
 use PHPUnit\Framework\TestCase;
 
 /**
