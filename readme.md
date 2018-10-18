@@ -8,6 +8,20 @@ A simple password hasher library.
 
 This is mostly an abstraction around password hashers to have an OOP interface to work with.
 
-# License and Copyright
+## Installation
+
+Installation via [Composer](https://getcomposer.org/)
+
+```sh
+composer require Phauthentic/password-hashers
+```
+
+## Documentation
+
+ * [Fallback Password Hasher](./docs/FallbackPasswordHasher.md)
+ * [Md5 & Sha1 Password Hasher](./docs/Md5-and-Sha1-PasswordHasher.md)
+ * [Implementing your own Hasher](./docs/Implementing-your-own-Hasher.md)
+
+## License and Copyright
 
 Licensed under the [MIT](LICENSE.txt) license.
