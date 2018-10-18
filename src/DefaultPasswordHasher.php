@@ -17,7 +17,9 @@ namespace Phauthentic\PasswordHasher;
 use RuntimeException;
 
 /**
- * Default password hashing class.
+ * Abstraction of the php password_hash() function
+ *
+ * @link http://php.net/manual/en/function.password-hash.php
  */
 class DefaultPasswordHasher extends AbstractPasswordHasher
 {
