@@ -1,9 +1,18 @@
 <?php
 declare(strict_types=1);
-
+/**
+ * Copyright (c) Phauthentic (https://github.com/Phauthentic)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Phauthentic (https://github.com/Phauthentic)
+ * @link          https://github.com/Phauthentic
+ * @license       https://opensource.org/licenses/mit-license.php MIT License
+ */
 namespace Phauthentic\PasswordHasher;
 
-use Cake\Auth\AbstractPasswordHasher;
 use PasswordHash;
 use RuntimeException;
 
@@ -55,7 +64,7 @@ class WordpressPasswordHasher extends AbstractPasswordHasher
      *   required to generate password hash.
      * @return string Password hash
      */
-    public function hash($password)
+    public function hash($password): string
     {
         $this->getPassWordHash()->hashPassword($password);
     }
@@ -68,7 +77,7 @@ class WordpressPasswordHasher extends AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    public function check($password, $hashedPassword)
+    public function check($password, string $hashedPassword): bool
     {
         return $this->getPassWordHash()->checkPassword($password, $hashedPassword);
     }
