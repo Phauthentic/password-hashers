@@ -18,10 +18,14 @@ composer require Phauthentic/password-hashers
 
 ## Documentation
 
+ * [Default Password Hasher](./docs/DefaultPasswordHasher.md)
  * [Fallback Password Hasher](./docs/FallbackPasswordHasher.md)
  * [Md5 & Sha1 Password Hasher](./docs/Md5-and-Sha1-PasswordHasher.md)
  * [Implementing your own Hasher](./docs/Implementing-your-own-Hasher.md)
 
-## License and Copyright
+## Copyright & License
 
-Licensed under the [MIT](LICENSE.txt) license.
+Licensed under the [MIT license](LICENSE.txt).
+
+* Copyright (c) [Phauthentic](https://github.com/Phauthentic)
+* Copyright (c) [Cake Software Foundation, Inc.](https://cakefoundation.org)
