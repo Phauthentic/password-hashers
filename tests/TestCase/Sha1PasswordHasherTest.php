@@ -36,4 +36,22 @@ class Sha1PasswordHasherTest extends TestCase
         $result = $hasher->hash('password');
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * testCheck
+     *
+     * @return void
+     */
+    public function testCheck(): void
+    {
+        $hasher = new Sha1PasswordHasher();
+
+        $hash = '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8';
+        $result = $hasher->check('password', $hash);
+        $this->assertTrue($result);
+
+        $hash = 'WRONG';
+        $result = $hasher->check('password', $hash);
+        $this->assertFalse($result);
+    }
 }

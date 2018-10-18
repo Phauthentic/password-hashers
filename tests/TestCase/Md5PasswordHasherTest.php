@@ -28,12 +28,30 @@ class Md5PasswordHasherTest extends TestCase
      *
      * @return void
      */
-    public function testHash()
+    public function testHash(): void
     {
         $hasher = new Md5PasswordHasher();
 
         $expected = '5f4dcc3b5aa765d61d8327deb882cf99';
         $result = $hasher->hash('password');
         $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * testCheck
+     *
+     * @return void
+     */
+    public function testCheck(): void
+    {
+        $hasher = new Md5PasswordHasher();
+
+        $hash = '5f4dcc3b5aa765d61d8327deb882cf99';
+        $result = $hasher->check('password', $hash);
+        $this->assertTrue($result);
+
+        $hash = 'WRONG';
+        $result = $hasher->check('password', $hash);
+        $this->assertFalse($result);
     }
 }

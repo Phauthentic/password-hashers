@@ -22,6 +22,17 @@ use PHPUnit\Framework\TestCase;
  */
 class WordpressPasswordHasherTest extends TestCase
 {
+    /**
+     * @inheritDoc
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        if (!class_exists('\PasswordHash')) {
+            $this->markTestSkipped('\PasswordHash class does not exist');
+        }
+    }
 
     /**
      * Tests that only the first hasher is user for hashing a password

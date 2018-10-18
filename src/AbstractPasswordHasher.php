@@ -14,6 +14,8 @@ declare(strict_types=1);
  */
 namespace Phauthentic\PasswordHasher;
 
+use InvalidArgumentException;
+
 /**
  * Abstract password hashing class
  */
@@ -43,6 +45,15 @@ abstract class AbstractPasswordHasher implements PasswordHasherInterface
      */
     public function setSalt(string $salt, string $position = self::SALT_AFTER): self
     {
+        if (!in_array($position, [self::SALT_BEFORE, self::SALT_AFTER])) {
+            throw new InvalidArgumentException(sprintf(
+                '`%s` is an invalud argument, it has to be `` or ``',
+                $position,
+                self::SALT_BEFORE,
+                self::SALT_AFTER
+            ));
+        }
+
         $this->salt = $salt;
         $this->saltPosition = $position;
     }
