@@ -25,6 +25,17 @@ use PHPUnit\Framework\TestCase;
  */
 class FallbackPasswordHasherTest extends TestCase
 {
+    /**
+     * testExceptionForEmptyHasherCollection
+     *
+     * @expectedException \RuntimeException
+     * @return void
+     */
+    public function testExceptionForEmptyHasherCollection(): void
+    {
+        $hasherCollection = new PasswordHasherCollection();
+        $hasher = new FallbackPasswordHasher($hasherCollection);
+    }
 
     /**
      * Tests that only the first hasher is user for hashing a password

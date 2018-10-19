@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Phauthentic\PasswordHasher;
 
 use ArrayIterator;
+use RuntimeException;
 use Traversable;
 
 /**
@@ -113,7 +114,7 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
      */
     public function offsetSet($offset, $value)
     {
-        $this->hashers[$offset] = $value;
+        throw new RuntimeException('Use add()');
     }
 
     /**
