@@ -52,7 +52,7 @@ class Md5PasswordHasher extends AbstractPasswordHasher
      *   required to generate password hash.
      * @return string Password hash
      */
-    public function hash($password): string
+    public function hash(string $password): string
     {
         if (!empty($this->salt)) {
             if ($this->saltPosition === self::SALT_BEFORE) {
