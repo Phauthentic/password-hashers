@@ -23,11 +23,11 @@ interface PasswordHasherInterface
     /**
      * Generates password hash.
      *
-     * @param string|array $password Plain text password to hash or array of data
+     * @param string $password Plain text password to hash or array of data
      *   required to generate password hash.
      * @return string Password hash
      */
-    public function hash($password): string;
+    public function hash(string $password): string;
 
     /**
      * Check hash. Generate hash from user provided password string or data array

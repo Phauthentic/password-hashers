@@ -48,7 +48,7 @@ class Md5PasswordHasher extends AbstractPasswordHasher
     /**
      * Generates password hash.
      *
-     * @param string|array $password Plain text password to hash or array of data
+     * @param string $password Plain text password to hash or array of data
      *   required to generate password hash.
      * @return string Password hash
      */

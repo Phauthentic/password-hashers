@@ -57,7 +57,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      * @param string $password Plain text password to hash.
      * @return string Password hash
      */
-    public function hash($password): string
+    public function hash(string $password): string
     {
         return $this->hashers[0]->hash($password);
     }

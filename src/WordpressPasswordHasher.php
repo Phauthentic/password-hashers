@@ -64,9 +64,9 @@ class WordpressPasswordHasher extends AbstractPasswordHasher
      *   required to generate password hash.
      * @return string Password hash
      */
-    public function hash($password): string
+    public function hash(string $password): string
     {
-        $this->getPassWordHash()->hashPassword($password);
+        return $this->getPassWordHash()->hashPassword($password);
     }
 
     /**
