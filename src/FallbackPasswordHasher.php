@@ -72,7 +72,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    public function check($password, string $hashedPassword): bool
+    public function check(string $password, string $hashedPassword): bool
     {
         /* @var $hasher \Phauthentic\PasswordHasher\PasswordHasherInterface */
         foreach ($this->hashers as $hasher) {
