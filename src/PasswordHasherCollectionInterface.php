@@ -27,8 +27,15 @@ interface PasswordHasherCollectionInterface extends IteratorAggregate, ArrayAcce
     /**
      * Adds a password hasher to the collection
      *
-     * @param \PasswordHasher\PasswordHasherInterface $hasher Hasher
+     * @param \Phauthentic\PasswordHasher\PasswordHasherInterface $hasher Hasher
      * @return void
      */
     public function add(PasswordHasherInterface $hasher): void;
+
+    /**
+     * Returns the count of password hashers in the collection
+     *
+     * @return integer
+     */
+    public function count(): int;
 }

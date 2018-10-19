@@ -14,6 +14,8 @@ declare(strict_types=1);
  */
 namespace Phauthentic\PasswordHasher;
 
+use RuntimeException;
+
 /**
  * A password hasher that can use multiple different hashes where only
  * one is the preferred one. This is useful when trying to migrate an
@@ -31,11 +33,15 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
     /**
      * Constructor
      *
-     * @param \Phauthentic\PasswordHasher\PasswordHasherCollectionInterface $hashers Hasher Collection
+     * @param \Phauthentic\PasswordHasher\PasswordHasherCollectionInterface $hasherCollection Hasher Collection
      */
-    public function __construct(PasswordHasherCollectionInterface $hashers)
+    public function __construct(PasswordHasherCollectionInterface $hasherCollection)
     {
-        $this->hashers = $hashers;
+        if ($hasherCollection->count() === 0) {
+            throw new RuntimeException('Your password hasher collection is empty. It must contain at least one hasher.');
+        }
+
+        $this->hashers = $hasherCollection;
     }
 
     /**
@@ -93,6 +99,8 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function needsRehash(string $password): bool
     {
+
+
         return $this->hashers[0]->needsRehash($password);
     }
 }

@@ -46,7 +46,7 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
     /**
      * Adds a password hasher to the collection
      *
-     * @param \PasswordHasher\PasswordHasherInterface $hasher Hasher
+     * @param \Phauthentic\PasswordHasher\PasswordHasherInterface $hasher Hasher
      * @return void
      */
     public function add(PasswordHasherInterface $hasher): void
@@ -128,5 +128,13 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
     public function offsetUnset($offset)
     {
         unset($this->hashers[$offset]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count(): int
+    {
+        return count($this->hashers);
     }
 }
