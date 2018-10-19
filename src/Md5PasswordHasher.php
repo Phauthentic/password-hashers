@@ -48,11 +48,11 @@ class Md5PasswordHasher extends AbstractPasswordHasher
     /**
      * Generates password hash.
      *
-     * @param string|array $password Plain text password to hash or array of data
-     *   required to generate password hash.
+     * @param string $password Plain text password to hash required to generate
+     * password hash.
      * @return string Password hash
      */
-    public function hash($password): string
+    public function hash(string $password): string
     {
         if (!empty($this->salt)) {
             if ($this->saltPosition === self::SALT_BEFORE) {
@@ -71,20 +71,20 @@ class Md5PasswordHasher extends AbstractPasswordHasher
      * @param string $password Password string
      * @return string
      */
-    protected function callHashFunction($password): string
+    protected function callHashFunction(string $password): string
     {
         return md5($password, $this->rawOutput);
     }
 
     /**
-     * Check hash. Generate hash from user provided password string or data array
+     * Check hash. Generate hash from user provided password string
      * and check against existing hash.
      *
-     * @param string|array $password Plain text password to hash or data array.
+     * @param string $password Plain text password to hash.
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    public function check($password, string $hashedPassword): bool
+    public function check(string $password, string $hashedPassword): bool
     {
         return $this->hash($password) === $hashedPassword;
     }

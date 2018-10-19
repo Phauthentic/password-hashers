@@ -64,20 +64,20 @@ class WordpressPasswordHasher extends AbstractPasswordHasher
      *   required to generate password hash.
      * @return string Password hash
      */
-    public function hash($password): string
+    public function hash(string $password): string
     {
-        $this->getPassWordHash()->hashPassword($password);
+        return $this->getPassWordHash()->hashPassword($password);
     }
 
     /**
      * Check hash. Generate hash from user provided password string or data array
      * and check against existing hash.
      *
-     * @param string|array $password Plain text password to hash or data array.
+     * @param string $password Plain text password to hash or data array.
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    public function check($password, string $hashedPassword): bool
+    public function check(string $password, string $hashedPassword): bool
     {
         return $this->getPassWordHash()->checkPassword($password, $hashedPassword);
     }

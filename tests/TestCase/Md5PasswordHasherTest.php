@@ -35,6 +35,28 @@ class Md5PasswordHasherTest extends TestCase
         $expected = '5f4dcc3b5aa765d61d8327deb882cf99';
         $result = $hasher->hash('password');
         $this->assertEquals($expected, $result);
+
+        $hasher->setSalt('salt');
+        $expected = 'b305cadbb3bce54f3aa59c64fec00dea';
+        $result = $hasher->hash('password');
+        $this->assertEquals($expected, $result);
+
+        $hasher->setSalt('salt', Md5PasswordHasher::SALT_BEFORE);
+        $expected = '67a1e09bb1f83f5007dc119c14d663aa';
+        $result = $hasher->hash('password');
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * testInvalidSaltPosition
+     *
+     * @expectedException InvalidArgumentException
+     * @return void
+     */
+    public function testInvalidSaltPosition(): void
+    {
+        $hasher = new Md5PasswordHasher();
+        $hasher->setSalt('salt', 'INVALID!!!');
     }
 
     /**

@@ -72,7 +72,7 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      * @param string $password Plain text password to hash.
      * @return string Password hash or false on failure.
      */
-    public function hash($password): string
+    public function hash(string $password): string
     {
         $hash = password_hash(
             $password,
@@ -94,7 +94,7 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    public function check($password, string $hashedPassword): bool
+    public function check(string $password, string $hashedPassword): bool
     {
         return password_verify($password, $hashedPassword);
     }

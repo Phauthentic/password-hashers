@@ -18,9 +18,9 @@ composer require Phauthentic/password-hashers
 
 ## Documentation
 
- * [Default Password Hasher](./docs/DefaultPasswordHasher.md)
- * [Fallback Password Hasher](./docs/FallbackPasswordHasher.md)
- * [Md5 & Sha1 Password Hasher](./docs/Md5-and-Sha1-PasswordHasher.md)
+ * [Default Password Hasher](./docs/DefaultPasswordHasher.md) features all algorithms [phps password_hash()](http://php.net/manual/de/function.password-hash.php) features.
+ * [Fallback Password Hasher](./docs/FallbackPasswordHasher.md) transparently upgrade hashes to new hash algorithms
+ * [Md5 & Sha1 Password Hasher](./docs/Md5-and-Sha1-PasswordHasher.md) deprecated hasing algorithms for legacy apps
  * [Implementing your own Hasher](./docs/Implementing-your-own-Hasher.md)
 
 ## Copyright & License

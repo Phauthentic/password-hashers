@@ -33,7 +33,7 @@ class Sha1PasswordHasher extends Md5PasswordHasher
      * @param string $password Password string
      * @return string
      */
-    protected function callHashFunction($password): string
+    protected function callHashFunction(string $password): string
     {
         return sha1($password, $this->rawOutput);
     }
