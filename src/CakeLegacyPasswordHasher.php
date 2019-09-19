@@ -32,18 +32,28 @@ class CakeLegacyPasswordHasher extends AbstractPasswordHasher
      *
      * @var string
      */
-    protected $hashType;
+    protected $hashType = 'sha1';
+
+    /**
+     * @var bool
+     */
+    protected $cakeIsPresent = false;
+
+    /**
+     * @var string
+     */
+    protected $salt;
 
     /**
      * {@inheritDoc}
      */
-    public function __construct()
+    public function __construct($useFallback = false)
     {
-        if (Configure::read('debug')) {
-            Debugger::checkSecurityKeys();
-        }
-        if (!class_exists(Security::class)) {
-            throw new RuntimeException('You must install the cakephp/utility dependency to use this password hasher');
+        if (class_exists(Security::class) && $useFallback === false) {
+            $this->cakeIsPresent = true;
+            if (Configure::read('debug')) {
+                Debugger::checkSecurityKeys();
+            }
         }
     }
 
@@ -66,9 +76,45 @@ class CakeLegacyPasswordHasher extends AbstractPasswordHasher
      * @param string $password Plain text password to hash.
      * @return string Password hash
      */
-    public function hash(string $password): string
+    public function hash(string $password): string {
+        if ($this->cakeIsPresent) {
+            return Security::hash($password, $this->hashType, true);
+        }
+
+        return $this->fallbackHash($password);
+    }
+
+    /**
+     * Basically a copy of Cakes Security::hash() method
+     *
+     * @param string $password
+     * @return string
+     */
+    protected function fallbackHash(string $password)
     {
-        return Security::hash($password, $this->hashType, true);
+        if (empty($this->hashType)) {
+            throw new RuntimeException('You must specify a hash type');
+        }
+
+        $algorithm = strtolower($this->hashType);
+
+        $availableAlgorithms = hash_algos();
+        if (!in_array($algorithm, $availableAlgorithms)) {
+            throw new RuntimeException(sprintf(
+                'The hash type `%s` was not found. Available algorithms are: %s',
+                $algorithm,
+                implode(', ', $availableAlgorithms)
+            ));
+        }
+
+        if ($this->salt) {
+            if (!is_string($this->salt)) {
+                throw new RuntimeException('No salt present');
+            }
+            $string = $this->salt . $password;
+        }
+
+        return hash($algorithm, $password);
     }
 
     /**
