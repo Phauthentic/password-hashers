@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Phauthentic\PasswordHasher;
 
 use ArrayIterator;
+use RuntimeException;
 use Traversable;
 
 /**
@@ -46,7 +47,7 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
     /**
      * Adds a password hasher to the collection
      *
-     * @param \PasswordHasher\PasswordHasherInterface $hasher Hasher
+     * @param \Phauthentic\PasswordHasher\PasswordHasherInterface $hasher Hasher
      * @return void
      */
     public function add(PasswordHasherInterface $hasher): void
@@ -113,7 +114,7 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
      */
     public function offsetSet($offset, $value)
     {
-        $this->hashers[$offset] = $value;
+        throw new RuntimeException('Use add()');
     }
 
     /**
@@ -128,5 +129,13 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
     public function offsetUnset($offset)
     {
         unset($this->hashers[$offset]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count(): int
+    {
+        return count($this->hashers);
     }
 }

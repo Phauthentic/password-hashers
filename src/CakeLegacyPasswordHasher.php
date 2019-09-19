@@ -89,7 +89,7 @@ class CakeLegacyPasswordHasher extends AbstractPasswordHasher
      * @param string $password Plain text password to hash.
      * @return string Password hash
      */
-    public function hash($password): string {
+    public function hash(string $password): string {
         if ($this->cakeIsPresent) {
             return Security::hash($password, $this->hashType, true);
         }
@@ -103,7 +103,7 @@ class CakeLegacyPasswordHasher extends AbstractPasswordHasher
      * @param string $password
      * @return string
      */
-    protected function fallbackHash($password)
+    protected function fallbackHash(string $password)
     {
         if (empty($this->hashType)) {
             throw new RuntimeException('You must specify a hash type');
@@ -137,7 +137,7 @@ class CakeLegacyPasswordHasher extends AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    public function check($password, string $hashedPassword): bool
+    public function check(string $password, string $hashedPassword): bool
     {
         return $hashedPassword === $this->hash($password);
     }
