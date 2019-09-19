@@ -71,19 +71,6 @@ class CakeLegacyPasswordHasher extends AbstractPasswordHasher
     }
 
     /**
-     * Sets the salt
-     *
-     * @param string $salt Salt
-     * @return $this
-     */
-    public function setSalt(string $salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
      * Generates password hash.
      *
      * @param string $password Plain text password to hash.
