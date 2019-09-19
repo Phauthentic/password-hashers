@@ -111,7 +111,7 @@ class CakeLegacyPasswordHasher extends AbstractPasswordHasher
             if (!is_string($this->salt)) {
                 throw new RuntimeException('No salt present');
             }
-            $string = $this->salt . $password;
+            $password = $this->salt . $password;
         }
 
         return hash($algorithm, $password);

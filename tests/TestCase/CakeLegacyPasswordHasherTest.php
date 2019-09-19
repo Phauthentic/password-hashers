@@ -33,8 +33,23 @@ class CakeLegacyPasswordHasherTest extends TestCase
     {
         parent::setUp();
 
-        $this->markTestSkipped();
         Security::setSalt('YJfIxfs2guVoUubWDYhG93b0qyJfIxfs2guwvniR2G0FgaC9mi');
+    }
+
+    /**
+     * testFallbackCode
+     *
+     * @return void
+     */
+    public function testFallbackCode(): void
+    {
+        $hasher = new CakeLegacyPasswordHasher(true);
+        $hasher->setSalt('YJfIxfs2guVoUubWDYhG93b0qyJfIxfs2guwvniR2G0FgaC9mi');
+
+        $password = $hasher->hash('foo');
+
+        $this->assertTrue($hasher->check('foo', $password));
+        $this->assertFalse($hasher->check('bar', $password));
     }
 
     /**
@@ -43,7 +58,7 @@ class CakeLegacyPasswordHasherTest extends TestCase
      *
      * @return void
      */
-    public function testNeedsRehash()
+    public function testNeedsRehash(): void
     {
         $hasher = new CakeLegacyPasswordHasher();
         $this->assertTrue($hasher->needsRehash(md5('foo')));
@@ -56,7 +71,7 @@ class CakeLegacyPasswordHasherTest extends TestCase
      *
      * @return void
      */
-    public function testHashAndCheck()
+    public function testHashAndCheck(): void
     {
         $hasher = new CakeLegacyPasswordHasher();
         $hasher->setHashType('md5');
