@@ -54,13 +54,7 @@ class Md5PasswordHasher extends AbstractPasswordHasher
      */
     public function hash(string $password): string
     {
-        if (!empty($this->salt)) {
-            if ($this->saltPosition === self::SALT_BEFORE) {
-                $password = $this->salt . $password;
-            } else {
-                $password = $password . $this->salt;
-            }
-        }
+        $password = $this->saltPassword($password);
 
         return $this->callHashFunction($password);
     }

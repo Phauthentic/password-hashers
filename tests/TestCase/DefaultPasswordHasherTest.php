@@ -22,6 +22,22 @@ use PHPUnit\Framework\TestCase;
  */
 class DefaultPasswordHasherTest extends TestCase
 {
+    /**
+     * @return void
+     */
+    public function testHashing(): void
+    {
+        $hasher = (new DefaultPasswordHasher())->setSalt('salt');
+
+        $withSalt = $hasher->hash('password');
+        $this->assertTrue($hasher->check('password', $withSalt));
+
+        $hasher->setSalt('');
+        $withOutSalt = $hasher->hash('password');
+        $this->assertTrue($hasher->check('password', $withOutSalt));
+
+        $this->assertNotEquals($withSalt, $withOutSalt);;
+    }
 
     /**
      * Tests that a password not produced by DefaultPasswordHasher needs
@@ -45,8 +61,13 @@ class DefaultPasswordHasherTest extends TestCase
      */
     public function testNeedsRehashWithDifferentOptions()
     {
-        $defaultHasher = (new DefaultPasswordHasher())->setHashType(PASSWORD_BCRYPT)->setHashOptions(['cost' => 10]);
-        $updatedHasher = (new DefaultPasswordHasher())->setHashType(PASSWORD_BCRYPT)->setHashOptions(['cost' => 12]);
+        $defaultHasher = (new DefaultPasswordHasher())
+            ->setHashType(PASSWORD_BCRYPT)
+            ->setHashOptions(['cost' => 10]);
+
+        $updatedHasher = (new DefaultPasswordHasher())
+            ->setHashType(PASSWORD_BCRYPT)
+            ->setHashOptions(['cost' => 12]);
 
         $password = $defaultHasher->hash('foo');
 
