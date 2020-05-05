@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,6 +14,7 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Phauthentic\PasswordHasher;
 
 use Cake\Core\Configure;
@@ -76,7 +79,8 @@ class CakeLegacyPasswordHasher extends AbstractPasswordHasher
      * @param string $password Plain text password to hash.
      * @return string Password hash
      */
-    public function hash(string $password): string {
+    public function hash(string $password): string
+    {
         if ($this->cakeIsPresent) {
             return Security::hash($password, $this->hashType, true);
         }
