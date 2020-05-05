@@ -65,6 +65,8 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function hash(string $password): string
     {
+        $password = $this->saltPassword($password);
+
         return $this->hashers[0]->hash($password);
     }
 
@@ -80,6 +82,8 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function check(string $password, string $hashedPassword): bool
     {
+        $password = $this->saltPassword($password);
+
         /* @var $hasher \Phauthentic\PasswordHasher\PasswordHasherInterface */
         foreach ($this->hashers as $hasher) {
             if ($hasher->check($password, $hashedPassword)) {
@@ -99,7 +103,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function needsRehash(string $password): bool
     {
-
+        $password = $this->saltPassword($password);
 
         return $this->hashers[0]->needsRehash($password);
     }
