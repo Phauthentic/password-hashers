@@ -50,11 +50,11 @@ class Md5PasswordHasherTest extends TestCase
     /**
      * testInvalidSaltPosition
      *
-     * @expectedException InvalidArgumentException
      * @return void
      */
     public function testInvalidSaltPosition(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $hasher = new Md5PasswordHasher();
         $hasher->setSalt('salt', 'INVALID!!!');
     }

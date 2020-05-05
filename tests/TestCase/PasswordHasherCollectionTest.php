@@ -55,12 +55,12 @@ class PasswordHasherCollectionTest extends TestCase
     /**
      * testOffsetSet
      *
-     * @expectedException \RuntimeException
+     * @return void
      */
     public function testOffsetSet(): void
     {
+        $this->expectException(\RuntimeException::class);
         $hasher = new DefaultPasswordHasher();
-
         $collection = new PasswordHasherCollection();
         $collection->offsetSet(0, $hasher);
     }

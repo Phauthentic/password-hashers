@@ -28,13 +28,13 @@ class FallbackPasswordHasherTest extends TestCase
     /**
      * testExceptionForEmptyHasherCollection
      *
-     * @expectedException \RuntimeException
      * @return void
      */
     public function testExceptionForEmptyHasherCollection(): void
     {
+        $this->expectException(\RuntimeException::class);
         $hasherCollection = new PasswordHasherCollection();
-        $hasher = new FallbackPasswordHasher($hasherCollection);
+        new FallbackPasswordHasher($hasherCollection);
     }
 
     /**
