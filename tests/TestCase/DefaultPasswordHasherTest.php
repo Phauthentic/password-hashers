@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,6 +14,7 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Authentication\Test\TestCase\PasswordHasher;
 
 use Phauthentic\PasswordHasher\DefaultPasswordHasher;
@@ -22,6 +25,23 @@ use PHPUnit\Framework\TestCase;
  */
 class DefaultPasswordHasherTest extends TestCase
 {
+    /**
+     * @return void
+     */
+    public function testHashing(): void
+    {
+        $hasher = (new DefaultPasswordHasher())->setSalt('salt');
+
+        $withSalt = $hasher->hash('password');
+        $this->assertTrue($hasher->check('password', $withSalt));
+
+        $hasher->setSalt('');
+        $withOutSalt = $hasher->hash('password');
+        $this->assertTrue($hasher->check('password', $withOutSalt));
+
+        $this->assertNotEquals($withSalt, $withOutSalt);
+        ;
+    }
 
     /**
      * Tests that a password not produced by DefaultPasswordHasher needs
@@ -45,8 +65,13 @@ class DefaultPasswordHasherTest extends TestCase
      */
     public function testNeedsRehashWithDifferentOptions()
     {
-        $defaultHasher = (new DefaultPasswordHasher())->setHashType(PASSWORD_BCRYPT)->setHashOptions(['cost' => 10]);
-        $updatedHasher = (new DefaultPasswordHasher())->setHashType(PASSWORD_BCRYPT)->setHashOptions(['cost' => 12]);
+        $defaultHasher = (new DefaultPasswordHasher())
+            ->setHashType(PASSWORD_BCRYPT)
+            ->setHashOptions(['cost' => 10]);
+
+        $updatedHasher = (new DefaultPasswordHasher())
+            ->setHashType(PASSWORD_BCRYPT)
+            ->setHashOptions(['cost' => 12]);
 
         $password = $defaultHasher->hash('foo');
 

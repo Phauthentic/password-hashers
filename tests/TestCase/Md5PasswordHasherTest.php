@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,6 +14,7 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Authentication\Test\TestCase\PasswordHasher;
 
 use Phauthentic\PasswordHasher\Md5PasswordHasher;
@@ -50,11 +53,11 @@ class Md5PasswordHasherTest extends TestCase
     /**
      * testInvalidSaltPosition
      *
-     * @expectedException InvalidArgumentException
      * @return void
      */
     public function testInvalidSaltPosition(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $hasher = new Md5PasswordHasher();
         $hasher->setSalt('salt', 'INVALID!!!');
     }

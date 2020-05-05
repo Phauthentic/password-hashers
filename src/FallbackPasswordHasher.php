@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,6 +12,9 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\PasswordHasher;
 
 use RuntimeException;
@@ -65,6 +68,8 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function hash(string $password): string
     {
+        $password = $this->saltPassword($password);
+
         return $this->hashers[0]->hash($password);
     }
 
@@ -80,6 +85,8 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function check(string $password, string $hashedPassword): bool
     {
+        $password = $this->saltPassword($password);
+
         /* @var $hasher \Phauthentic\PasswordHasher\PasswordHasherInterface */
         foreach ($this->hashers as $hasher) {
             if ($hasher->check($password, $hashedPassword)) {
@@ -99,7 +106,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function needsRehash(string $password): bool
     {
-
+        $password = $this->saltPassword($password);
 
         return $this->hashers[0]->needsRehash($password);
     }

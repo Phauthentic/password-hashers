@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,8 +12,12 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\PasswordHasher;
 
+use InvalidArgumentException;
 use RuntimeException;
 
 /**
@@ -28,7 +32,7 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      * Hashing algo to use. Valid values are those supported by `$algo` argument
      * of `password_hash()`. Defaults to `PASSWORD_DEFAULT`
      *
-     * @var int
+     * @var int|string
      */
     protected $hashType = PASSWORD_DEFAULT;
 
@@ -56,11 +60,17 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
     /**
      * Sets the hash type
      *
-     * @param int $type Hashing algo to use. Valid values are those supported by `$algo` argument of `password_hash()`. Defaults to `PASSWORD_DEFAULT`
+     * @param int|string $type Hashing algo to use. Valid values are those supported by `$algo` argument of `password_hash()`. Defaults to `PASSWORD_DEFAULT`
      * @return $this
      */
-    public function setHashType(int $type): self
+    public function setHashType($type): self
     {
+        if (!is_int($type) && !is_string($type)) {
+            throw new InvalidArgumentException(sprintf(
+                'You must pass an integer or string value'
+            ));
+        }
+
         $this->hashType = $type;
 
         return $this;
@@ -75,7 +85,7 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
     public function hash(string $password): string
     {
         $hash = password_hash(
-            $password,
+            $this->saltPassword($password),
             $this->hashType,
             $this->hashOptions
         );
@@ -96,7 +106,10 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      */
     public function check(string $password, string $hashedPassword): bool
     {
-        return password_verify($password, $hashedPassword);
+        return password_verify(
+            $this->saltPassword($password),
+            $hashedPassword
+        );
     }
 
     /**
@@ -108,6 +121,10 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      */
     public function needsRehash(string $password): bool
     {
-        return password_needs_rehash($password, $this->hashType, $this->hashOptions);
+        return password_needs_rehash(
+            $this->saltPassword($password),
+            $this->hashType,
+            $this->hashOptions
+        );
     }
 }

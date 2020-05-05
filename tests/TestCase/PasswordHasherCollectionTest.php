@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,6 +14,7 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Authentication\Test\TestCase\PasswordHasher;
 
 use Phauthentic\PasswordHasher\DefaultPasswordHasher;
@@ -55,12 +58,12 @@ class PasswordHasherCollectionTest extends TestCase
     /**
      * testOffsetSet
      *
-     * @expectedException \RuntimeException
+     * @return void
      */
     public function testOffsetSet(): void
     {
+        $this->expectException(\RuntimeException::class);
         $hasher = new DefaultPasswordHasher();
-
         $collection = new PasswordHasherCollection();
         $collection->offsetSet(0, $hasher);
     }

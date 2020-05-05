@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,6 +12,9 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\PasswordHasher;
 
 use InvalidArgumentException;
@@ -21,8 +24,8 @@ use InvalidArgumentException;
  */
 abstract class AbstractPasswordHasher implements PasswordHasherInterface
 {
-    const SALT_BEFORE = 'before';
-    const SALT_AFTER = 'after';
+    public const SALT_BEFORE = 'before';
+    public const SALT_AFTER = 'after';
 
     /**
      * Salt
@@ -67,6 +70,25 @@ abstract class AbstractPasswordHasher implements PasswordHasherInterface
                 self::SALT_AFTER
             ));
         }
+    }
+
+    /**
+     * Adds the salt to a password
+     *
+     * @param string $password Password to salt
+     * @return string Salted password
+     */
+    protected function saltPassword(string $password): string
+    {
+        if (empty($this->salt)) {
+            return $password;
+        }
+
+        if ($this->saltPosition === self::SALT_BEFORE) {
+            return $this->salt . $password;
+        }
+
+        return $password . $this->salt;
     }
 
     /**

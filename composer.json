@@ -3,8 +3,6 @@
     "description": "Password Hashing Library",
     "type": "library",
     "require-dev": {
-        "phpunit/phpunit": "^7.3",
-        "squizlabs/php_codesniffer": "^3.3",
         "cakephp/cakephp": "^3.6"
     },
     "license": "MIT",
@@ -26,5 +24,30 @@
         "psr-4": {
             "Phauthentic\\PasswordHasher\\Test\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true,
+        "process-timeout": 0,
+        "bin-dir": "bin"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php config/composer_post_install.php"
+        ],
+        "tests": [
+            "./bin/phpunit"
+        ],
+        "cscheck": [
+            "./bin/phpcs ./src ./tests --standard=./phpcs.xml -s"
+        ],
+        "csfix": [
+            "./bin/phpcbf ./src ./tests --standard=./phpcs.xml"
+        ],
+        "analyze": [
+            "./bin/phpstan analyse -l 5 -c phpstan.neon ./src\\"
+        ],
+        "phive": [
+            "php ./config/composer_phive.php"
+        ]
     }
 }

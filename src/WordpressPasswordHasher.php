@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /**
  * Copyright (c) Phauthentic (https://github.com/Phauthentic)
  *
@@ -11,6 +11,9 @@ declare(strict_types=1);
  * @link          https://github.com/Phauthentic
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\PasswordHasher;
 
 use PasswordHash;
@@ -51,7 +54,7 @@ class WordpressPasswordHasher extends AbstractPasswordHasher
     public function getPassWordHash()
     {
         if (empty($this->wpPassWordHash)) {
-            $this->wpPassWordHash = new PasswordHash(8, true);
+            $this->wpPasswordHash = new PasswordHash(8, true);
         }
 
         return $this->wpPassWordHash;
