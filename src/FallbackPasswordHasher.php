@@ -13,7 +13,6 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-
 declare(strict_types=1);
 
 namespace Phauthentic\PasswordHasher;

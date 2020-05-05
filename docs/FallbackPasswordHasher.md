@@ -18,3 +18,9 @@ $collection = new PasswordhasherCollection([
 
 $hasher = new FallbackPasswordHasher($collection);
 ```
+
+## Attention to salts
+
+When you use the salting functionality with this hasher, it will pass the salted password to *every* hasher in the collection!
+
+So either use the same salt for all and use the salting with this hasher or configure the salt individually for each hasher in the collection.
