@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -14,6 +12,8 @@ declare(strict_types=1);
  * @link          http://cakephp.org CakePHP(tm) Project
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
 
 namespace Phauthentic\PasswordHasher;
 
@@ -32,7 +32,7 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      * Hashing algo to use. Valid values are those supported by `$algo` argument
      * of `password_hash()`. Defaults to `PASSWORD_DEFAULT`
      *
-     * @var int
+     * @var int|string
      */
     protected $hashType = PASSWORD_DEFAULT;
 

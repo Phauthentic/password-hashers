@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -15,6 +13,8 @@ declare(strict_types=1);
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+declare(strict_types=1);
+
 namespace Phauthentic\PasswordHasher;
 
 use InvalidArgumentException;
@@ -24,8 +24,8 @@ use InvalidArgumentException;
  */
 abstract class AbstractPasswordHasher implements PasswordHasherInterface
 {
-    const SALT_BEFORE = 'before';
-    const SALT_AFTER = 'after';
+    public const SALT_BEFORE = 'before';
+    public const SALT_AFTER = 'after';
 
     /**
      * Salt
