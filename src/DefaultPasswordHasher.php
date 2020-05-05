@@ -62,7 +62,7 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      */
     public function setHashType($type): self
     {
-        if (!is_int($this) && !is_string($type)) {
+        if (!is_int($type) && !is_string($type)) {
             throw new InvalidArgumentException(sprintf(
                 'You must pass an integer or string value'
             ));
