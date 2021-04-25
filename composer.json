@@ -34,6 +34,9 @@
         "post-install-cmd": [
             "php config/composer_post_install.php"
         ],
+        "post-update-cmd": [
+            "php config/composer_post_install.php"
+        ],
         "tests": [
             "./bin/phpunit"
         ],
@@ -44,7 +47,7 @@
             "./bin/phpcbf ./src ./tests --standard=./phpcs.xml"
         ],
         "analyze": [
-            "./bin/phpstan analyse -l 5 -c phpstan.neon ./src\\"
+            "./bin/phpstan analyse"
         ],
         "phive": [
             "php ./config/composer_phive.php"

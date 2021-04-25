@@ -38,11 +38,13 @@ build:
                     version: '7.4'
                     ini:
                         phar.readonly: 'Off'
+                    pecl_extensions:
+                    - xdebug
             tests:
                 override:
                 - sh ./config/ci-setup.sh
                 -
-                    command: './bin/phpunit --coverage-clover=coverage.xml --bootstrap ./tests/bootstrap.php'
+                    command: 'XDEBUG_MODE=coverage ./bin/phpunit --coverage-clover=coverage.xml'
                     coverage:
                         file: 'coverage.xml'
                         format: 'php-clover'
@@ -52,17 +54,23 @@ build:
                     version: '8.0'
                     ini:
                         phar.readonly: 'Off'
+                    pecl_extensions:
+                    - xdebug
             tests:
                 override:
                 - sh ./config/ci-setup.sh
                 -
-                    command: './bin/phpunit --coverage-clover=coverage.xml --bootstrap ./tests/bootstrap.php'
+                    command: 'XDEBUG_MODE=coverage ./bin/phpunit --coverage-clover=coverage.xml'
                     coverage:
                         file: 'coverage.xml'
                         format: 'php-clover'
 
-        analysis:
+        validation:
             tests:
                 override:
+                - sh ./config/ci-setup.sh
                 - php-scrutinizer-run --enable-security-analysis
-                - phpcs-run --standard=./phpcs.xml ./src
+                -
+                    command: './bin/phpcs'
+                -
+                    command: './bin/phpstan'
