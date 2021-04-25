@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Phauthentic\PasswordHasher;
 
 use PasswordHash;
-use RuntimeException;
 
 /**
  * Wordpress Password Hasher
@@ -32,16 +31,14 @@ use RuntimeException;
 class WordpressPasswordHasher extends AbstractPasswordHasher
 {
     /**
-     * Wordpress Passwordhasher
-     *
      * @var \PasswordHash
      */
-    protected $wpPasswordHash;
+    protected PasswordHash $wpPassWordHash;
 
     /**
      * {@inheritDoc}
      */
-    public function __construct(?PasswordHash $passwordHash = null)
+    public function __construct(PasswordHash $passwordHash)
     {
         $this->wpPassWordHash = $passwordHash;
     }
@@ -51,34 +48,21 @@ class WordpressPasswordHasher extends AbstractPasswordHasher
      *
      * @return \PasswordHash
      */
-    public function getPassWordHash()
+    public function getPassWordHash(): PasswordHash
     {
-        if (empty($this->wpPassWordHash)) {
-            $this->wpPasswordHash = new PasswordHash(8, true);
-        }
-
         return $this->wpPassWordHash;
     }
 
     /**
-     * Generates password hash.
-     *
-     * @param string|array $password Plain text password to hash or array of data
-     *   required to generate password hash.
-     * @return string Password hash
+     * {@inheritDoc}
      */
-    public function hash(string $password): string
+    public function hash($password): string
     {
         return $this->getPassWordHash()->hashPassword($password);
     }
 
     /**
-     * Check hash. Generate hash from user provided password string or data array
-     * and check against existing hash.
-     *
-     * @param string $password Plain text password to hash or data array.
-     * @param string $hashedPassword Existing hashed password.
-     * @return bool True if hashes match else false.
+     * {@inheritDoc}
      */
     public function check(string $password, string $hashedPassword): bool
     {

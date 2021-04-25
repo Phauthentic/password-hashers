@@ -3,7 +3,6 @@
     <arg name="tab-width" value="4"/>
     <rule ref="PSR12">
         <exclude name="Generic.Files.LineLength.TooLong"/>
-        <exclude name="PSR2.Classes.PropertyDeclaration"/>
         <exclude name="PSR1.Classes.ClassDeclaration.MultipleClasses"/>
         <!-- Use this if you want tabs over spaces -->
         <!-- <exclude name="Generic.WhiteSpace.DisallowTabIndent"/> -->
@@ -12,4 +11,6 @@
     <!-- <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>-->
     <file>./src</file>
     <file>./tests</file>
+    <exclude-pattern>/tests/PasswordHash.php</exclude-pattern>
+    <exclude-pattern>/tests/bootstrap.php</exclude-pattern>
 </ruleset>

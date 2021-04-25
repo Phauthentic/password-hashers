@@ -25,24 +25,17 @@ build_failure_conditions:
 - 'project.metric_change("scrutinizer.test_coverage", < -0.1)'
 
 build:
-    services:
-      #mariadb: 10.1.40
     environment:
-        hosts:
-            cake3.world-architects.com: '127.0.0.1'
-        redis: true
-        node: 10.16.0
         php:
             version: '7.4'
             ini:
                 phar.readonly: 'Off'
-        #elasticsearch: '6'
 
     nodes:
-        tests-php73:
+        tests-php74:
             environment:
                 php:
-                    version: '7.3'
+                    version: '7.4'
                     ini:
                         phar.readonly: 'Off'
             tests:
@@ -53,11 +46,10 @@ build:
                     coverage:
                         file: 'coverage.xml'
                         format: 'php-clover'
-
-        tests-php74:
+        tests-php80:
             environment:
                 php:
-                    version: '7.4'
+                    version: '8.0'
                     ini:
                         phar.readonly: 'Off'
             tests:

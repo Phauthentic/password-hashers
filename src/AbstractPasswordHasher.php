@@ -32,18 +32,20 @@ abstract class AbstractPasswordHasher implements PasswordHasherInterface
      *
      * @return void
      */
-    protected $salt = '';
+    protected string $salt = '';
 
     /**
      * Position of the salt
      *
      * @var string
      */
-    protected $saltPosition;
+    protected string $saltPosition;
 
     /**
      * Sets the salt if any was used
      *
+     * @param string $salt
+     * @param string $position
      * @return $this
      */
     public function setSalt(string $salt, string $position = self::SALT_AFTER): self
@@ -58,13 +60,14 @@ abstract class AbstractPasswordHasher implements PasswordHasherInterface
     /**
      * Checks the salt position argument
      *
+     * @param string $position
      * @return void
      */
-    protected function checkSaltPositionArgument($position): void
+    protected function checkSaltPositionArgument(string $position): void
     {
-        if (!in_array($position, [self::SALT_BEFORE, self::SALT_AFTER])) {
+        if (!in_array($position, [self::SALT_BEFORE, self::SALT_AFTER], true)) {
             throw new InvalidArgumentException(sprintf(
-                '`%s` is an invalud argument, it has to be `` or ``',
+                '`%s` is an invalid argument, it has to be `%s` or `%s`',
                 $position,
                 self::SALT_BEFORE,
                 self::SALT_AFTER

@@ -31,14 +31,14 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
     /**
      * List of Hashers
      *
-     * @var array
+     * @var array<\Phauthentic\PasswordHasher\PasswordHasherInterface>
      */
-    protected $hashers = [];
+    protected array $hashers = [];
 
     /**
      * Constructor
      *
-     * @param iterable $hashers An iterable of password hashers
+     * @param iterable<\Phauthentic\PasswordHasher\PasswordHasherInterface> $hashers An iterable of password hashers
      */
     public function __construct(iterable $hashers = [])
     {
@@ -62,7 +62,7 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
      * Retrieve an external iterator
      *
      * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return Traversable An instance of an object implementing <b>Iterator</b> or
+     * @return Traversable<\Phauthentic\PasswordHasher\PasswordHasherInterface> An instance of an object implementing <b>Iterator</b> or
      * <b>Traversable</b>
      */
     public function getIterator(): Traversable

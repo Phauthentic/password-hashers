@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -15,8 +13,11 @@ declare(strict_types=1);
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+declare(strict_types=1);
+
 namespace Authentication\Test\TestCase\PasswordHasher;
 
+use PasswordHash;
 use Phauthentic\PasswordHasher\WordpressPasswordHasher;
 use PHPUnit\Framework\TestCase;
 
@@ -44,6 +45,8 @@ class WordpressPasswordHasherTest extends TestCase
      */
     public function testHash()
     {
-        $hasher = new WordpressPasswordHasher();
+        $hasher = new WordpressPasswordHasher(new \PasswordHash(8, false));
+        $hashedPassword = $hasher->hash('password');
+        $this->assertTrue($hasher->check('password', $hashedPassword));
     }
 }

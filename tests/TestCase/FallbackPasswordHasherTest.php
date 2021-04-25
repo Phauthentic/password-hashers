@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -15,11 +13,13 @@ declare(strict_types=1);
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+declare(strict_types=1);
+
 namespace Authentication\Test\TestCase\PasswordHasher;
 
 use Phauthentic\PasswordHasher\DefaultPasswordHasher;
 use Phauthentic\PasswordHasher\FallbackPasswordHasher;
-use Phauthentic\PasswordHasher\CakeLegacyPasswordHasher;
+use Phauthentic\PasswordHasher\Md5PasswordHasher;
 use Phauthentic\PasswordHasher\PasswordHasherCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -47,7 +47,7 @@ class FallbackPasswordHasherTest extends TestCase
      */
     public function testHash()
     {
-        $legacy = new CakeLegacyPasswordHasher();
+        $legacy = new Md5PasswordHasher();
         $simple = new DefaultPasswordHasher();
         $hasherCollection = new PasswordHasherCollection([
             $legacy,
@@ -66,7 +66,7 @@ class FallbackPasswordHasherTest extends TestCase
      */
     public function testCheck()
     {
-        $legacy = new CakeLegacyPasswordHasher();
+        $legacy = new Md5PasswordHasher();
         $simple = new DefaultPasswordHasher();
         $hasherCollection = new PasswordHasherCollection([
             $legacy,
@@ -89,8 +89,7 @@ class FallbackPasswordHasherTest extends TestCase
     public function testCheckWithConfigs()
     {
         $simple = new DefaultPasswordHasher();
-        $legacy = (new CakeLegacyPasswordHasher())
-            ->setHashType('md5');
+        $legacy = new Md5PasswordHasher();
         $collection = new PasswordHasherCollection([
             $legacy,
             $simple
@@ -111,7 +110,7 @@ class FallbackPasswordHasherTest extends TestCase
      */
     public function testNeedsRehash()
     {
-        $legacy = new CakeLegacyPasswordHasher();
+        $legacy = new Md5PasswordHasher();
         $collection = new PasswordHasherCollection([
             new DefaultPasswordHasher(),
             $legacy

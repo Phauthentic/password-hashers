@@ -32,7 +32,7 @@ class Md5PasswordHasher extends AbstractPasswordHasher
      *
      * @var bool
      */
-    protected $rawOutput = false;
+    protected bool $rawOutput = false;
 
     /**
      * Sets the raw output mode of sha1

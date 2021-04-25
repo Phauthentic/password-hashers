@@ -29,14 +29,14 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
     /**
      * Holds the list of password hasher objects that will be used
      *
-     * @var \Phauthentic\PasswordHasher\PasswordHasherCollectionInterface
+     * @var \Phauthentic\PasswordHasher\PasswordHasherCollectionInterface<\Phauthentic\PasswordHasher\PasswordHasherInterface>
      */
-    protected $hashers;
+    protected PasswordHasherCollectionInterface $hashers;
 
     /**
      * Constructor
      *
-     * @param \Phauthentic\PasswordHasher\PasswordHasherCollectionInterface $hasherCollection Hasher Collection
+     * @param \Phauthentic\PasswordHasher\PasswordHasherCollectionInterface<\Phauthentic\PasswordHasher\PasswordHasherInterface> $hasherCollection Hasher Collection
      */
     public function __construct(PasswordHasherCollectionInterface $hasherCollection)
     {

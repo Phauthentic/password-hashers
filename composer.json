@@ -2,9 +2,6 @@
     "name": "phauthentic/password-hashers",
     "description": "Password Hashing Library",
     "type": "library",
-    "require-dev": {
-        "cakephp/cakephp": "^3.6"
-    },
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +9,7 @@
         }
     ],
     "require": {
-        "php": "^7.1|^8.0"
+        "php": "^7.4|^8.0"
     },
     "minimum-stability": "stable",
     "autoload": {
@@ -23,7 +20,10 @@
     "autoload-dev": {
         "psr-4": {
             "Phauthentic\\PasswordHasher\\Test\\": "tests/"
-        }
+        },
+        "files": [
+            "tests/PasswordHash.php"
+        ]
     },
     "config": {
         "sort-packages": true,

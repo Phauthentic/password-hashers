@@ -17,7 +17,6 @@ declare(strict_types=1);
 
 namespace Phauthentic\PasswordHasher;
 
-use InvalidArgumentException;
 use RuntimeException;
 
 /**
@@ -32,7 +31,8 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      * Hashing algo to use. Valid values are those supported by `$algo` argument
      * of `password_hash()`. Defaults to `PASSWORD_DEFAULT`
      *
-     * @var int|string
+     * @link https://www.php.net/manual/en/function.password-hash.php
+     * @var mixed
      */
     protected $hashType = PASSWORD_DEFAULT;
 
@@ -40,14 +40,14 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
      * Associative array of options. Check the PHP manual for supported options
      * for each hash type. Defaults to empty array.
      *
-     * @var array
+     * @var array<mixed, mixed>
      */
-    protected $hashOptions = [];
+    protected array $hashOptions = [];
 
     /**
      * Set Hash Options
      *
-     * @param array $options Associative array of options. Check the PHP manual for supported options for each hash type. Defaults to empty array.
+     * @param array<mixed, mixed> $options Associative array of options. Check the PHP manual for supported options for each hash type. Defaults to empty array.
      * @return $this
      */
     public function setHashOptions(array $options): self
@@ -60,17 +60,11 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
     /**
      * Sets the hash type
      *
-     * @param int|string $type Hashing algo to use. Valid values are those supported by `$algo` argument of `password_hash()`. Defaults to `PASSWORD_DEFAULT`
+     * @param mixed $type Hashing algo to use. Valid values are those supported by `$algo` argument of `password_hash()`. Defaults to `PASSWORD_DEFAULT`
      * @return $this
      */
     public function setHashType($type): self
     {
-        if (!is_int($type) && !is_string($type)) {
-            throw new InvalidArgumentException(sprintf(
-                'You must pass an integer or string value'
-            ));
-        }
-
         $this->hashType = $type;
 
         return $this;
