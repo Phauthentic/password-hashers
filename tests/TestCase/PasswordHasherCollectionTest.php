@@ -26,7 +26,6 @@ use PHPUnit\Framework\TestCase;
  */
 class PasswordHasherCollectionTest extends TestCase
 {
-
     /**
      * testCount
      *

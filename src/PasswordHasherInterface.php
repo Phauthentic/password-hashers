@@ -22,7 +22,6 @@ namespace Phauthentic\PasswordHasher;
  */
 interface PasswordHasherInterface
 {
-
     /**
      * Generates password hash.
      *

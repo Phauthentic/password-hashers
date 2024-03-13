@@ -82,7 +82,7 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
      * <p>
      * The return value will be casted to boolean if non-boolean was returned.
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->hashers[$offset]);
     }
@@ -96,11 +96,13 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
      * </p>
      * @return mixed Can return all value types.
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (isset($this->hashers[$offset])) {
             return $this->hashers[$offset];
         }
+
+        return null;
     }
 
     /**
@@ -115,7 +117,7 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
      * </p>
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         throw new RuntimeException('Use add()');
     }
@@ -129,7 +131,7 @@ class PasswordHasherCollection implements PasswordHasherCollectionInterface
      * </p>
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->hashers[$offset]);
     }

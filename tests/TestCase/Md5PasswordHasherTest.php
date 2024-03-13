@@ -25,7 +25,6 @@ use PHPUnit\Framework\TestCase;
  */
 class Md5PasswordHasherTest extends TestCase
 {
-
     /**
      * Tests that only the first hasher is user for hashing a password
      *

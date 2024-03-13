@@ -26,7 +26,6 @@ use RuntimeException;
  */
 class DefaultPasswordHasher extends AbstractPasswordHasher
 {
-
     /**
      * Hashing algo to use. Valid values are those supported by `$algo` argument
      * of `password_hash()`. Defaults to `PASSWORD_DEFAULT`
@@ -84,7 +83,7 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
             $this->hashOptions
         );
 
-        if ($hash === false) {
+        if (!is_string($hash)) {
             throw new RuntimeException('Failed to hash password.');
         }
 
