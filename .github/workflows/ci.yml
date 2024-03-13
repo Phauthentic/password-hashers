@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['7.4', '8.0']
+        php-version: ['8.0', '8.1', '8.2', '8.3']
 
     steps:
     - uses: actions/checkout@v1
@@ -26,28 +26,28 @@ jobs:
 
     - name: Composer install
       run: |
-        if [[ ${{ matrix.prefer-lowest == '7.4' }} ]]; then
+        if [[ ${{ matrix.prefer-lowest == '8.1' }} ]]; then
           composer update --prefer-lowest --prefer-stable
         else
           composer install
         fi
     - name: Run PHPUnit
       run: |
-        if [[ ${{ matrix.php-version }} == '7.4' ]]; then
+        if [[ ${{ matrix.php-version }} == '8.1' ]]; then
           bin/phpunit --coverage-clover=coverage.xml
         else
           bin/phpunit
         fi
     - name: Code Coverage Report
-      if: success() && matrix.php-version == '7.4'
-      uses: codecov/codecov-action@v1
+      if: success() && matrix.php-version == '8.1'
+      uses: codecov/codecov-action@v4
 
   validation:
     name: Coding Standard & Static Analysis
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 1
 
